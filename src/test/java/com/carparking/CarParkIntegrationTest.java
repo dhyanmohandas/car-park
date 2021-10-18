@@ -1,8 +1,8 @@
-package com.carpark;
+package com.carparking;
 
-import com.carpark.model.ParkingSlot;
-import com.carpark.model.ParkingSlotRequest;
-import org.junit.Test;
+import com.carparking.model.ParkingSlot;
+import com.carparking.model.ParkingSlotRequest;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,28 +27,24 @@ public class CarParkIntegrationTest {
     @Test
     public void testInsertParkingSlot() throws Exception{
         final HttpEntity<ParkingSlotRequest> request = new HttpEntity<>(new ParkingSlotRequest("KA-01",2));
-        final ResponseEntity<ParkingSlot> response = restTemplate.postForEntity("/parkingSlots", request, ParkingSlot.class);
+        final ResponseEntity<ParkingSlot> response = restTemplate.postForEntity("/parkingslots", request, ParkingSlot.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getVehicleNumber()).isEqualTo("KA-01");
         assertThat(response.getBody().getDurationInHours()).isEqualTo(2);
 
     }
-    @org.junit.jupiter.api.Test
+    @Test
     public void putTest(){
-        String entityUrl = "/parkingSlots" + "/" + 2;
         HttpEntity<ParkingSlotRequest> request = new HttpEntity<>(new ParkingSlotRequest("KA", 2));
-//        ResponseEntity<ParkingSlot> res= testRestTemplate.postForEntity("/parkingSlots", request, ParkingSlot.class);
-        ResponseEntity<ParkingSlot> res = restTemplate
-                .exchange(entityUrl, HttpMethod.PUT, request, ParkingSlot.class);
+        ResponseEntity<ParkingSlot> res = restTemplate.exchange("/parkingslots/2", HttpMethod.PUT, request, ParkingSlot.class);
         assertThat(res.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertEquals(HttpStatus.OK,res.getStatusCode());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void delete(){
-        String entityUrl = "/parkingSlots" + "/" + 2;
+        String entityUrl = "/parkingslots" + "/" + 2;
         HttpEntity<ParkingSlotRequest> request = new HttpEntity<>(new ParkingSlotRequest("KA", 2));
-//        ResponseEntity<ParkingSlot> res= testRestTemplate.postForEntity("/parkingSlots", request, ParkingSlot.class);
         ResponseEntity<ParkingSlot> res = restTemplate
                 .exchange(entityUrl, HttpMethod.DELETE, request, ParkingSlot.class);
         assertThat(res.getStatusCode()).isEqualTo(HttpStatus.OK);

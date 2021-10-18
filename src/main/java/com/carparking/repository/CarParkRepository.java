@@ -1,10 +1,7 @@
-package com.carpark.repository;
+package com.carparking.repository;
 
-import com.carpark.exception.InvalidDurationException;
-import com.carpark.exception.NoParkingSpaceException;
-import com.carpark.model.ParkingSlot;
-import com.carpark.model.ParkingSlotRequest;
-import com.carpark.utility.Constants;
+import com.carparking.model.ParkingSlot;
+import com.carparking.model.ParkingSlotRequest;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
@@ -15,13 +12,9 @@ import java.util.List;
 @Repository
 public class CarParkRepository {
 
-    private List<ParkingSlot> parkingSlots;
+    private List<ParkingSlot> parkingSlots =new ArrayList<>();
     private int index;
 
-    public CarParkRepository() {
-        this.parkingSlots = new ArrayList<>();
-        this.index=0;
-    }
 
     public int getParkingSlotAllocated() {
         return parkingSlots.size();
@@ -43,7 +36,7 @@ public class CarParkRepository {
     }
 
     public ParkingSlot deleteParkingSlot(int id) {
-        ParkingSlot parkingSlot = parkingSlots.get(id);
+        ParkingSlot parkingSlot = parkingSlots.stream().filter(o->o.getId()==id).findAny().orElse(null);
         parkingSlots.removeIf(o -> o.getId() == id);
         return parkingSlot;
     }

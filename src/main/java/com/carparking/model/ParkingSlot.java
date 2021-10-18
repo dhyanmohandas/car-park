@@ -1,4 +1,4 @@
-package com.carpark.model;
+package com.carparking.model;
 
 import java.sql.Timestamp;
 

@@ -1,11 +1,11 @@
-package com.carpark.service;
+package com.carparking.service;
 
-import com.carpark.exception.InvalidDurationException;
-import com.carpark.exception.NoParkingSpaceException;
-import com.carpark.exception.ParkingSlotNotFound;
-import com.carpark.model.ParkingSlot;
-import com.carpark.model.ParkingSlotRequest;
-import com.carpark.repository.CarParkRepository;
+import com.carparking.exception.InvalidDurationException;
+import com.carparking.exception.NoParkingSpaceException;
+import com.carparking.exception.ParkingSlotNotFound;
+import com.carparking.model.ParkingSlot;
+import com.carparking.model.ParkingSlotRequest;
+import com.carparking.repository.CarParkRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.carpark.utility;
+package com.carparking.utility;
 
 public class Constants {
     public static final int PARKING_SPACE_SIZE = 10;

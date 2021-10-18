@@ -1,15 +1,13 @@
-package com.carpark.controller;
+package com.carparking.controller;
 
-import com.carpark.exception.InvalidDurationException;
-import com.carpark.exception.NoParkingSpaceException;
-import com.carpark.exception.ParkingSlotNotFound;
-import com.carpark.model.ParkingSlot;
-import com.carpark.model.ParkingSlotRequest;
-import com.carpark.repository.CarParkRepository;
-import com.carpark.service.CarParkService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.carparking.exception.InvalidDurationException;
+import com.carparking.exception.NoParkingSpaceException;
+import com.carparking.exception.ParkingSlotNotFound;
+import com.carparking.model.ParkingSlot;
+import com.carparking.model.ParkingSlotRequest;
+import com.carparking.service.CarParkService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,16 +15,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
@@ -46,7 +39,7 @@ public class CarParkControllerTest {
     private CarParkService carParkService;
 
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void should_createParkingSlot_when_parkingSlotIsValid() throws Exception{
         given(carParkService.createParkingSlot(any())).willReturn(new ParkingSlot(1,"KA-01", 2, Timestamp.from(Instant.now())));
         ParkingSlotRequest parkingSlotRequest = new ParkingSlotRequest("KA-01",2);
@@ -94,8 +87,7 @@ public class CarParkControllerTest {
 
     @Test
     public void Should_DeleteParkingSlot_ForValidId() throws Exception {
-        int is=0;
-        mockMvc.perform(MockMvcRequestBuilders.delete("/parkingSlots/" + 2)).andExpect(status().isNoContent());
+        mockMvc.perform(MockMvcRequestBuilders.delete("/parkingslots/" + 2)).andExpect(status().isNoContent());
     }
 
     @Test
